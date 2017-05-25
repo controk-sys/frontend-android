@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.collegeapp;
+package com.example.jourdanrodrigues.controk;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

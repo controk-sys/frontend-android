@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.collegeapp;
+package com.example.jourdanrodrigues.controk;
 
 import org.junit.Test;
 

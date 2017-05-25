@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.collegeapp;
+package com.example.jourdanrodrigues.controk;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
