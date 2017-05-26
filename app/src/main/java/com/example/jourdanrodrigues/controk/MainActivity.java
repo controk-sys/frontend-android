@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                     // Solution source: https://stackoverflow.com/a/35719588/4694834
                     getSupportActionBar().setTitle(mTitle);
                 }
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(mDrawerTitle);
                 }
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
 
