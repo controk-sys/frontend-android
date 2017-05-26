@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Controk App</string>
+    <string-array name="menu_entries">
+        <item>Clients</item>
+        <item>Employees</item>
+        <item>Suppliers</item>
+        <item>Products</item>
+        <item>Stock</item>
+    </string-array>
 </resources>
