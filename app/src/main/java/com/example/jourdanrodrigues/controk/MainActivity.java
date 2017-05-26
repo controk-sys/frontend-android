@@ -27,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mMenuEntries));
-        // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -78,18 +77,11 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            // Highlight the selected item, update the title, and close the drawer
+            mDrawerList.setItemChecked(position, true);
+            setTitle(mMenuEntries[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
-    }
-
-    /**
-     * Swaps fragments in the main content view
-     */
-    private void selectItem(int position) {
-        // Highlight the selected item, update the title, and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mMenuEntries[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
     }
 
     @Override
