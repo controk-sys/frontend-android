@@ -1,7 +1,6 @@
 package com.example.jourdanrodrigues.controk;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -103,8 +102,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         }
 
         private void setFragmentManager(Fragment fragment) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
         }
     }
 
