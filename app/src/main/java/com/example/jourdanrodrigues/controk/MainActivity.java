@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity implements ClientFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
     private String[] mMenuEntries;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
