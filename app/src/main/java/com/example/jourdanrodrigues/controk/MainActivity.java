@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
                 setFragmentManager(new EmployeeFragment());
             } else if (position == SupplierFragment.ARG_MENU_POSITION) {
                 setFragmentManager(new SupplierFragment());
+            } else if (position == ProductFragment.ARG_MENU_POSITION) {
+                setFragmentManager(new ProductFragment());
             }
 
             // update selected item and title, then close the drawer
