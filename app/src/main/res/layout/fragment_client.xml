@@ -1,12 +1,129 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.jourdanrodrigues.controk.ClientFragment">
+    tools:context="com.example.jourdanrodrigues.controk.ClientFragment"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/client_label" />
-</FrameLayout>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/general_data_label"
+            style="@style/section_header"
+            android:text="@string/general_data_label" />
+
+        <LinearLayout
+            android:id="@+id/field_set_1"
+            style="@style/upside_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/general_data_label"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/name_field"
+                style="@style/two_column_item"
+                android:hint="@string/name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences" />
+
+            <EditText
+                android:id="@+id/cpf_field"
+                style="@style/two_column_item"
+                android:hint="@string/cpf"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/field_set_2"
+            style="@style/upside_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/field_set_1">
+
+            <EditText
+                android:id="@+id/obs_field"
+                style="@style/two_column_item"
+                android:hint="@string/observations"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/section_header"
+            android:id="@+id/contact_label"
+            android:layout_below="@id/field_set_2"
+            android:text="@string/contact_label" />
+
+        <LinearLayout
+            style="@style/upside_margin"
+            android:id="@+id/field_set_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_label"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/cell_phone_field"
+                style="@style/two_column_item"
+                android:hint="@string/cell_phone"
+                android:imeOptions="actionNext"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/phone_field"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/phone"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="14" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/upside_margin"
+            android:id="@+id/field_set_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/field_set_3">
+
+            <EditText
+                android:id="@+id/email_field"
+                style="@style/two_column_item"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/section_header"
+            android:id="@+id/address_label"
+            android:layout_below="@id/field_set_4"
+            android:text="@string/address_label" />
+
+        <LinearLayout
+            style="@style/upside_margin"
+            android:id="@+id/field_set_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address_label"
+            android:weightSum="2">
+
+            <Spinner
+                style="@style/two_column_item"
+                android:id="@+id/place_option_field"
+                android:layout_height="match_parent"
+                android:inputType="phone" />
+
+            <EditText
+                style="@style/two_column_item"
+                android:id="@+id/place_name_field"
+                android:hint="@string/place_name"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="14" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">Controk App</string>
-    <string name="client_label">Clients here! :D</string>
+    <string name="general_data_label">General Data</string>
+    <string name="contact_label">Contact Information</string>
     <string name="employee_label">Employees here! :D</string>
     <string name="supplier_label">Suppliers here! :D</string>
     <string name="product_label">Products here! :D</string>
     <string name="stock_label">Stock here! :D</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="name">Name</string>
+    <string name="cpf">CPF</string>
+    <string name="observations">Observations</string>
+    <string name="phone">Phone</string>
+    <string name="cell_phone">Cell Phone</string>
+    <string name="email">Email</string>
+    <string name="address_label">Address Information</string>
+    <string name="place_name">Name</string>
     <string-array name="menu_entries">
         <item>Clients</item>
         <item>Employees</item>

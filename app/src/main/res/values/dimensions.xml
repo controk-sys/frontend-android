@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="default_margin">20dp</dimen>
+    <dimen name="end_margin">100dp</dimen>
+</resources>
