@@ -85,16 +85,20 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         private void selectItem(int position) {
             // update the main content by replacing fragments
             if (position == ClientFragment.ARG_MENU_POSITION) {
-                Fragment fragment = new ClientFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                setFragmentManager(new ClientFragment());
+            } else if (position == EmployeeFragment.ARG_MENU_POSITION) {
+                setFragmentManager(new EmployeeFragment());
             }
 
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
             setTitle(mMenuEntries[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
+        }
+
+        private void setFragmentManager(Fragment fragment) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         }
     }
 

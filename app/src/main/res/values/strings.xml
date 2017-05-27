@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Controk App</string>
     <string name="client_label">Clients here! :D</string>
+    <string name="employee_label">Employees here! :D</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string-array name="menu_entries">
