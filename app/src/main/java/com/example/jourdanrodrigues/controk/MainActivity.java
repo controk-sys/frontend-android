@@ -2,7 +2,6 @@ package com.example.jourdanrodrigues.controk;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
-    private String[] mMenuEntries;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -24,16 +22,15 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMenuEntries = getResources().getStringArray(R.array.menu_entries);
+        String[] menuEntries = getResources().getStringArray(R.array.menu_entries);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mMenuEntries));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, menuEntries));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
 
-        // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         if (getSupportActionBar() != null) {
@@ -45,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
 
@@ -58,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // Highlight the selected item, update the title, and close the drawer
             selectItem(position);
         }
 
@@ -91,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(String string) {
 
     }
 }

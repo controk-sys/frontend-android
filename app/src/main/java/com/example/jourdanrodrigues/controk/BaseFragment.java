@@ -1,7 +1,6 @@
 package com.example.jourdanrodrigues.controk;
 
 import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +46,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String string);
     }
 }
