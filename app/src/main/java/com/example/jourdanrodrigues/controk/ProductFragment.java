@@ -7,8 +7,8 @@ public class ProductFragment extends BaseFragment {
         return R.layout.fragment_product;
     }
 
-    public int getLabel() {
-        return R.string.product_label;
+    public int getTitle() {
+        return R.string.product_title;
     }
 
     public ProductFragment() {

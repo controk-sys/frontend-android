@@ -7,8 +7,8 @@ public class EmployeeFragment extends BaseFragment {
         return R.layout.fragment_employee;
     }
 
-    public int getLabel() {
-        return R.string.employee_label;
+    public int getTitle() {
+        return R.string.employee_title;
     }
 
     public EmployeeFragment() {

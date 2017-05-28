@@ -7,8 +7,8 @@ public class SupplierFragment extends BaseFragment {
         return R.layout.fragment_supplier;
     }
 
-    public int getLabel() {
-        return R.string.supplier_label;
+    public int getTitle() {
+        return R.string.supplier_title;
     }
 
     public SupplierFragment() {

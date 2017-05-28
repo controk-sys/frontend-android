@@ -14,7 +14,7 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getFragment();
 
-    public abstract int getLabel();
+    public abstract int getTitle();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
     private void setTitle() {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(getLabel());
+            actionBar.setTitle(getTitle());
         }
     }
 

@@ -7,8 +7,8 @@ public class ClientFragment extends BaseFragment {
         return R.layout.fragment_client;
     }
 
-    public int getLabel() {
-        return R.string.client_label;
+    public int getTitle() {
+        return R.string.client_title;
     }
 
     public ClientFragment() {

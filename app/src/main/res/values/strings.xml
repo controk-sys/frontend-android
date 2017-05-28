@@ -2,11 +2,11 @@
     <string name="app_name">Controk App</string>
     <string name="general_data_label">General Data</string>
     <string name="contact_label">Contact Information</string>
-    <string name="client_label">Clients</string>
-    <string name="employee_label">Employees</string>
-    <string name="supplier_label">Suppliers</string>
-    <string name="product_label">Products</string>
-    <string name="stock_label">Stock</string>
+    <string name="client_title">Clients</string>
+    <string name="employee_title">Employees</string>
+    <string name="supplier_title">Suppliers</string>
+    <string name="product_title">Products</string>
+    <string name="stock_title">Stock</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="name">Name</string>
@@ -18,10 +18,10 @@
     <string name="address_label">Address Information</string>
     <string name="place_name">Name</string>
     <string-array name="menu_entries">
-        <item name="clients">@string/client_label</item>
-        <item name="employees">@string/employee_label</item>
-        <item name="suppliers">@string/supplier_label</item>
-        <item name="products">@string/product_label</item>
-        <item name="stock">@string/stock_label</item>
+        <item name="clients">@string/client_title</item>
+        <item name="employees">@string/employee_title</item>
+        <item name="suppliers">@string/supplier_title</item>
+        <item name="products">@string/product_title</item>
+        <item name="stock">@string/stock_title</item>
     </string-array>
 </resources>

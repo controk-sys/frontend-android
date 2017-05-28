@@ -7,8 +7,8 @@ public class StockFragment extends BaseFragment {
         return R.layout.fragment_stock;
     }
 
-    public int getLabel() {
-        return R.string.stock_label;
+    public int getTitle() {
+        return R.string.stock_title;
     }
 
     public StockFragment() {
