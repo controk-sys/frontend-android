@@ -2,9 +2,33 @@ package com.example.jourdanrodrigues.controk;
 
 import android.app.Fragment;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
+
+    public abstract int getFragment();
+
+    public abstract int getLabel();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(getFragment(), container, false);
+        setTitle();
+        return view;
+    }
+
+    private void setTitle() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getLabel());
+        }
+    }
 
     @Override
     public void onStart() {

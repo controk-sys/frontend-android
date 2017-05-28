@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +31,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mMenuEntries));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mTitle = mDrawerTitle = getTitle();
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                if (getSupportActionBar() != null) {
-                    // Solution source: https://stackoverflow.com/a/35719588/4694834
-                    getSupportActionBar().setTitle(mTitle);
-                }
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(mDrawerTitle);
-                }
-            }
-        };
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -95,9 +76,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
                 setFragmentManager(new StockFragment());
             }
 
-            // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
-            setTitle(mMenuEntries[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
         }
 
@@ -109,14 +88,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(mTitle);
-        }
     }
 
     @Override
