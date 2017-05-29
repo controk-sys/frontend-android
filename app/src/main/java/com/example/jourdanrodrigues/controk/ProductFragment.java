@@ -14,8 +14,4 @@ public class ProductFragment extends BaseFragment {
     public ProductFragment() {
 
     }
-
-    public static ProductFragment newInstance() {
-        return new ProductFragment();
-    }
 }

@@ -14,8 +14,4 @@ public class StockFragment extends BaseFragment {
     public StockFragment() {
 
     }
-
-    public static StockFragment newInstance() {
-        return new StockFragment();
-    }
 }

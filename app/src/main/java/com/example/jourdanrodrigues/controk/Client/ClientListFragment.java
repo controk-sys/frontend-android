@@ -26,7 +26,6 @@ import java.util.List;
 
 public class ClientListFragment extends BaseFragment {
     public static final int ARG_MENU_POSITION = 0;
-    private OnFragmentInteractionListener mListener;
 
     public ClientListFragment() {
 
@@ -55,10 +54,6 @@ public class ClientListFragment extends BaseFragment {
         });
 
         return view;
-    }
-
-    public static ClientListFragment newInstance() {
-        return new ClientListFragment();
     }
 
     @Override

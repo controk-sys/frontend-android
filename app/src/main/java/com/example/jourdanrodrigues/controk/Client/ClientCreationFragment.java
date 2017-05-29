@@ -15,8 +15,4 @@ public class ClientCreationFragment extends BaseFragment {
     public ClientCreationFragment() {
 
     }
-
-    public static ClientCreationFragment newInstance() {
-        return new ClientCreationFragment();
-    }
 }

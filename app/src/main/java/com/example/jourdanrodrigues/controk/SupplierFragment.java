@@ -14,8 +14,4 @@ public class SupplierFragment extends BaseFragment {
     public SupplierFragment() {
 
     }
-
-    public static SupplierFragment newInstance() {
-        return new SupplierFragment();
-    }
 }

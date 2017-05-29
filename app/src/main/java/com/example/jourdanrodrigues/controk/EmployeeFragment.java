@@ -14,8 +14,4 @@ public class EmployeeFragment extends BaseFragment {
     public EmployeeFragment() {
 
     }
-
-    public static EmployeeFragment newInstance() {
-        return new EmployeeFragment();
-    }
 }
