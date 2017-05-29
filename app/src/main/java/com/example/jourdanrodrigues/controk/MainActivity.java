@@ -62,24 +62,24 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         private void selectItem(int position) {
             // update the main content by replacing fragments
             if (position == ClientListFragment.ARG_MENU_POSITION) {
-                setFragmentManager(new ClientListFragment());
+                updateFragment(new ClientListFragment());
             } else if (position == EmployeeFragment.ARG_MENU_POSITION) {
-                setFragmentManager(new EmployeeFragment());
+                updateFragment(new EmployeeFragment());
             } else if (position == SupplierFragment.ARG_MENU_POSITION) {
-                setFragmentManager(new SupplierFragment());
+                updateFragment(new SupplierFragment());
             } else if (position == ProductFragment.ARG_MENU_POSITION) {
-                setFragmentManager(new ProductFragment());
+                updateFragment(new ProductFragment());
             } else if (position == StockFragment.ARG_MENU_POSITION) {
-                setFragmentManager(new StockFragment());
+                updateFragment(new StockFragment());
             }
 
             mDrawerList.setItemChecked(position, true);
             mDrawerLayout.closeDrawer(mDrawerList);
         }
+    }
 
-        private void setFragmentManager(Fragment fragment) {
-            getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
-        }
+    private void updateFragment(Fragment fragment) {
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
     @Override
