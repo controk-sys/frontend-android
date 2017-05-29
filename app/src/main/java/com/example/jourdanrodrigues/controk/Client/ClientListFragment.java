@@ -75,7 +75,7 @@ public class ClientListFragment extends BaseFragment {
         final List<Client> clients = new ArrayList<>();
 
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
-        String url = getResources().getString(R.string.web_service_api) + "clients/";// Request a string response from the provided URL.
+        String url = getResources().getString(R.string.web_service_api) + "clients/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
             new Response.Listener<String>() {
@@ -90,9 +90,8 @@ public class ClientListFragment extends BaseFragment {
                                 client.getString("email"),
                                 client.getString("cpf")
                             ));
-
-                            callback.onSuccess(clients);
                         }
+                        callback.onSuccess(clients);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
