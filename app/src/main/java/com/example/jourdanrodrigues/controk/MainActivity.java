@@ -79,7 +79,10 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     }
 
     public void updateFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getSupportFragmentManager().beginTransaction()
+            .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+            .replace(R.id.content_frame, fragment)
+            .commit();
     }
 
     @Override
