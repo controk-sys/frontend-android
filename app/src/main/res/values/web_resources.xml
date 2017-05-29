@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_service_api">http://controk-wsrv.herokuapp.com/api/v1/</string>
+</resources>
