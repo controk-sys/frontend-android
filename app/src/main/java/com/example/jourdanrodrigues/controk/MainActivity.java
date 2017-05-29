@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         }
 
         private void selectItem(int position) {
-            // update the main content by replacing fragments
             if (position == ClientListFragment.ARG_MENU_POSITION) {
                 updateFragment(new ClientListFragment());
             } else if (position == EmployeeFragment.ARG_MENU_POSITION) {
