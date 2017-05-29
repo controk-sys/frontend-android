@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.controk;
+package com.example.jourdanrodrigues.controk.Client;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,6 +14,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.jourdanrodrigues.controk.BaseFragment;
+import com.example.jourdanrodrigues.controk.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

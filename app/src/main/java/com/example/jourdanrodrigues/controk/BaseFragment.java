@@ -45,7 +45,7 @@ public abstract class BaseFragment extends Fragment {
         mListener = null;
     }
 
-    interface OnFragmentInteractionListener {
+    protected interface OnFragmentInteractionListener {
         void onFragmentInteraction(String string);
     }
 }

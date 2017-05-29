@@ -1,4 +1,7 @@
-package com.example.jourdanrodrigues.controk;
+package com.example.jourdanrodrigues.controk.Client;
+
+import com.example.jourdanrodrigues.controk.BaseFragment;
+import com.example.jourdanrodrigues.controk.R;
 
 public class ClientCreationFragment extends BaseFragment {
     public int getFragment() {

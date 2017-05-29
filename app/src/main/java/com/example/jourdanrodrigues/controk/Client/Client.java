@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.controk;
+package com.example.jourdanrodrigues.controk.Client;
 
 class Client {
     private String name;
