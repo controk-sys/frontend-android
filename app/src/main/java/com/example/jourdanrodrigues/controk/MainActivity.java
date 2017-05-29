@@ -1,8 +1,8 @@
 package com.example.jourdanrodrigues.controk;
 
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     }
 
     private void updateFragment(Fragment fragment) {
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
     @Override
