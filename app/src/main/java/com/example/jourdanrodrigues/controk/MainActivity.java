@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         }
     }
 
-    private void updateFragment(Fragment fragment) {
+    public void updateFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 

@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jourdanrodrigues.controk.BaseFragment;
+import com.example.jourdanrodrigues.controk.MainActivity;
 import com.example.jourdanrodrigues.controk.R;
 
 import org.json.JSONArray;
@@ -35,6 +36,13 @@ public class ClientListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
+
+        view.findViewById(R.id.fab_create_client).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).updateFragment(new ClientCreationFragment());
+            }
+        });
 
         final RecyclerView clientList = (RecyclerView) view.findViewById(R.id.client_recycler_view);
         final ClientAdapter.Listener clientListener = new ClientAdapter.Listener() {
