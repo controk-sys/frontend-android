@@ -1,8 +1,11 @@
 package com.example.jourdanrodrigues.controk.Client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jourdanrodrigues.controk.BaseFragment;
-import com.example.jourdanrodrigues.controk.MainActivity;
 import com.example.jourdanrodrigues.controk.R;
 
 import org.json.JSONArray;
@@ -44,7 +46,10 @@ public class ClientListFragment extends BaseFragment {
         view.findViewById(R.id.fab_create_client).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).updateFragment(new ClientCreationFragment(), "ClientListFragment");
+                AppCompatActivity activity = (AppCompatActivity) getActivity();
+                Intent intent = new Intent(activity, ClientCreationActivity.class);
+                Bundle options = ActivityOptionsCompat.makeCustomAnimation(activity, R.anim.enter, R.anim.exit).toBundle();
+                startActivity(intent, options);
             }
         });
 
@@ -73,7 +78,7 @@ public class ClientListFragment extends BaseFragment {
 
     @Override
     public int getTitle() {
-        return R.string.client_title;
+        return R.string.client_list_title;
     }
 
     private void setSwipeRefresh(final View view) {

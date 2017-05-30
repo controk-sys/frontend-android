@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import com.example.jourdanrodrigues.controk.Client.ClientListFragment;
 
-public class MainActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
+public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -87,21 +87,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     }
 
     @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(String string) {
-
     }
 }
