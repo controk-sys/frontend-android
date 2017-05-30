@@ -2,6 +2,7 @@ package com.example.jourdanrodrigues.controk.Client;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,9 @@ import java.util.List;
 
 public class ClientListFragment extends BaseFragment {
     public static final int ARG_MENU_POSITION = 0;
+    private RecyclerView mClientList;
+    private ClientAdapter.Listener mClientClickListener;
+    private SwipeRefreshLayout mSwipeRefresh;
 
     public ClientListFragment() {
 
@@ -44,8 +48,11 @@ public class ClientListFragment extends BaseFragment {
             }
         });
 
-        final RecyclerView clientList = (RecyclerView) view.findViewById(R.id.recycler_view_client);
-        final ClientAdapter.Listener clientListener = new ClientAdapter.Listener() {
+        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_client);
+        mSwipeRefresh.setRefreshing(true);
+
+        mClientList = (RecyclerView) view.findViewById(R.id.recycler_view_client);
+        mClientClickListener = new ClientAdapter.Listener() {
             @Override
             public void onClick(Client client) {
                 // Implementation for client
@@ -53,13 +60,8 @@ public class ClientListFragment extends BaseFragment {
             }
         };
 
-        populateClients(view, new VolleyCallback() {
-            @Override
-            public void onSuccess(List<Client> clients) {
-                clientList.setLayoutManager(new LinearLayoutManager(getActivity()));
-                clientList.setAdapter(new ClientAdapter(clients, clientListener));
-            }
-        });
+        setSwipeRefresh(view);
+        populateClients(view);
 
         return view;
     }
@@ -74,7 +76,16 @@ public class ClientListFragment extends BaseFragment {
         return R.string.client_title;
     }
 
-    private void populateClients(final View view, final VolleyCallback callback) {
+    private void setSwipeRefresh(final View view) {
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                populateClients(view);
+            }
+        });
+    }
+
+    private void populateClients(final View view) {
         final List<Client> clients = new ArrayList<>();
 
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
@@ -94,7 +105,10 @@ public class ClientListFragment extends BaseFragment {
                                 client.getString("cpf")
                             ));
                         }
-                        callback.onSuccess(clients);
+
+                        mClientList.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        mClientList.setAdapter(new ClientAdapter(clients, mClientClickListener));
+                        mSwipeRefresh.setRefreshing(false);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
