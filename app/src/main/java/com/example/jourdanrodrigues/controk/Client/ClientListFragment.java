@@ -44,7 +44,7 @@ public class ClientListFragment extends BaseFragment {
         view.findViewById(R.id.fab_create_client).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).updateFragment(new ClientCreationFragment());
+                ((MainActivity) getActivity()).updateFragment(new ClientCreationFragment(), "ClientListFragment");
             }
         });
 

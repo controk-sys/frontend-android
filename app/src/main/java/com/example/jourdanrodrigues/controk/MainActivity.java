@@ -2,6 +2,7 @@ package com.example.jourdanrodrigues.controk;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -61,15 +62,15 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
 
         private void selectItem(int position) {
             if (position == ClientListFragment.ARG_MENU_POSITION) {
-                updateFragment(new ClientListFragment());
+                updateFragment(new ClientListFragment(), null);
             } else if (position == EmployeeFragment.ARG_MENU_POSITION) {
-                updateFragment(new EmployeeFragment());
+                updateFragment(new EmployeeFragment(), null);
             } else if (position == SupplierFragment.ARG_MENU_POSITION) {
-                updateFragment(new SupplierFragment());
+                updateFragment(new SupplierFragment(), null);
             } else if (position == ProductFragment.ARG_MENU_POSITION) {
-                updateFragment(new ProductFragment());
+                updateFragment(new ProductFragment(), null);
             } else if (position == StockFragment.ARG_MENU_POSITION) {
-                updateFragment(new StockFragment());
+                updateFragment(new StockFragment(), null);
             }
 
             mDrawerList.setItemChecked(position, true);
@@ -77,11 +78,21 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         }
     }
 
-    public void updateFragment(Fragment fragment) {
+    public void updateFragment(Fragment fragment, @Nullable String backToFragment) {
         getSupportFragmentManager().beginTransaction()
             .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
             .replace(R.id.content_frame, fragment)
+            .addToBackStack(backToFragment)
             .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
