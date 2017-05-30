@@ -107,15 +107,17 @@ public class ClientListFragment extends BaseFragment {
                             clients.add(new Client(
                                 client.getString("name"),
                                 client.getString("email"),
-                                client.getString("cpf")
+                                client.getString("cpf"),
+                                client.getString("observation")
                             ));
                         }
 
                         mClientList.setLayoutManager(new LinearLayoutManager(getActivity()));
                         mClientList.setAdapter(new ClientAdapter(clients, mClientClickListener));
-                        mSwipeRefresh.setRefreshing(false);
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    } finally {
+                        mSwipeRefresh.setRefreshing(false);
                     }
                 }
             },
@@ -123,6 +125,7 @@ public class ClientListFragment extends BaseFragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Snackbar.make(view, "Couldn't retrieve clients", Snackbar.LENGTH_LONG).show();
+                    mSwipeRefresh.setRefreshing(false);
                 }
             });
         queue.add(stringRequest);

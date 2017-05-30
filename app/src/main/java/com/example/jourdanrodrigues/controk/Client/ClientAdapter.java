@@ -26,6 +26,7 @@ class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientViewHolder>
         TextView name;
         TextView email;
         TextView cpf;
+        TextView observation;
 
         ClientViewHolder(View view) {
             super(view);
@@ -33,6 +34,7 @@ class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientViewHolder>
             name = (TextView) view.findViewById(R.id.client_name);
             email = (TextView) view.findViewById(R.id.client_email);
             cpf = (TextView) view.findViewById(R.id.client_cpf);
+            observation = (TextView) view.findViewById(R.id.client_observation);
         }
     }
 
@@ -45,9 +47,11 @@ class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientViewHolder>
     @Override
     public void onBindViewHolder(ClientViewHolder clientViewHolder, int i) {
         final Client client = clients.get(i);
+        // TODO: Figure a way to display special characters correctly
         clientViewHolder.name.setText(client.getName());
         clientViewHolder.email.setText(client.getEmail());
         clientViewHolder.cpf.setText(client.getCpf());
+        clientViewHolder.observation.setText(client.getObservation());
 
         clientViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
