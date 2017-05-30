@@ -44,7 +44,7 @@ public class ClientListFragment extends BaseFragment {
             }
         });
 
-        final RecyclerView clientList = (RecyclerView) view.findViewById(R.id.client_recycler_view);
+        final RecyclerView clientList = (RecyclerView) view.findViewById(R.id.recycler_view_client);
         final ClientAdapter.Listener clientListener = new ClientAdapter.Listener() {
             @Override
             public void onClick(Client client) {
