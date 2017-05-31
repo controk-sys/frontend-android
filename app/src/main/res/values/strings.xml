@@ -19,6 +19,7 @@
     <string name="email">Email</string>
     <string name="address_label">Address Information</string>
     <string name="place_name">Name</string>
+    <string name="try_again">TRY AGAIN</string>
 
     <string-array name="menu_entries">
         <item name="clients">@string/client_list_title</item>

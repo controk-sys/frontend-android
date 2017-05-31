@@ -124,7 +124,14 @@ public class ClientListFragment extends BaseFragment {
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Snackbar.make(view, "Couldn't retrieve clients", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Couldn't retrieve clients", Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.try_again, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mSwipeRefresh.setRefreshing(true);
+                                populateClients(v);
+                            }
+                        }).show();
                     mSwipeRefresh.setRefreshing(false);
                 }
             });
