@@ -130,8 +130,4 @@ public class ClientListFragment extends BaseFragment {
             });
         queue.add(stringRequest);
     }
-
-    interface VolleyCallback {
-        void onSuccess(List<Client> Clients);
-    }
 }
