@@ -5,9 +5,11 @@ import android.view.MenuItem;
 import com.example.jourdanrodrigues.controk.Address.Address;
 import com.example.jourdanrodrigues.controk.Contact.Contact;
 
-public class BasePersonCreationActivity extends BaseActivity {
+public abstract class BasePersonCreationActivity extends BaseActivity {
     public Address mAddress;
     public Contact mContact;
+
+    public abstract void performCreation(BaseFragmentCreation fragment);
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

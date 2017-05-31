@@ -32,7 +32,7 @@ import java.util.HashMap;
 
 public class AddressCreationFragment extends BaseFragmentCreation {
     private String[] mPlaceOptions;
-    private HashMap<String, Integer> mPlaceOptionsMap;
+    private HashMap<String, Integer> mPlaceOptionsMap = null;
     private Spinner mPlaceOption;
     private EditText mPlaceName;
     private EditText mNumber;
@@ -51,13 +51,13 @@ public class AddressCreationFragment extends BaseFragmentCreation {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
 
-        setActionSendListener(view);
+        setActionSendListener();
 
         view.findViewById(R.id.fab_finish_creation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!errorInFields()) {
-                    performCreation(view);
+                    performCreation();
                 }
             }
         });
@@ -67,8 +67,9 @@ public class AddressCreationFragment extends BaseFragmentCreation {
         return view;
     }
 
-    private void performCreation(View view) {
-        ((BasePersonCreationActivity) getActivity()).mAddress = new Address(
+    private void performCreation() {
+        BasePersonCreationActivity activity = (BasePersonCreationActivity) getActivity();
+        activity.mAddress = new Address(
             mPlaceOptionsMap.get(mPlaceOption.getSelectedItem().toString()),
             mPlaceName.getText().toString(),
             Integer.parseInt(mNumber.getText().toString()),
@@ -78,7 +79,7 @@ public class AddressCreationFragment extends BaseFragmentCreation {
             mState.getText().toString(),
             mCep.getText().toString()
         );
-        Snackbar.make(view, "Successfully got here.", Snackbar.LENGTH_LONG).show();
+        activity.performCreation(this);
     }
 
     @Override
@@ -92,37 +93,39 @@ public class AddressCreationFragment extends BaseFragmentCreation {
     }
 
     private void setPlaceOptions() {
-        final AppCompatActivity activity = (AppCompatActivity) getActivity();
-        RequestQueue queue = Volley.newRequestQueue(activity);
-        String url = getResources().getString(R.string.web_service_api) + "place_options/";
+        if (mPlaceOptions == null) {
+            final AppCompatActivity activity = (AppCompatActivity) getActivity();
+            RequestQueue queue = Volley.newRequestQueue(activity);
+            String url = getResources().getString(R.string.web_service_api) + "place_options/";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        buildPlaceOptions(new JSONArray(response));
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, mPlaceOptions);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        ((Spinner) activity.findViewById(R.id.place_option_field)).setAdapter(adapter);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            buildPlaceOptions(new JSONArray(response));
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, mPlaceOptions);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            ((Spinner) activity.findViewById(R.id.place_option_field)).setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Snackbar.make(activity.findViewById(R.id.address_creation), "Error gathering data", Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.try_again, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                setPlaceOptions();
-                            }
-                        }).show();
-                }
-            });
-        queue.add(stringRequest);
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Snackbar.make(activity.findViewById(R.id.address_creation), "Error gathering data", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.try_again, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    setPlaceOptions();
+                                }
+                            }).show();
+                    }
+                });
+            queue.add(stringRequest);
+        }
     }
 
     private void buildPlaceOptions(JSONArray placeOptions) throws JSONException {
@@ -163,11 +166,11 @@ public class AddressCreationFragment extends BaseFragmentCreation {
         setEmptyFieldValidations(mCep);
     }
 
-    private void setActionSendListener(final View view) {
+    private void setActionSendListener() {
         mCep.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    performCreation(view);
+                    performCreation();
                     return true;
                 }
                 return false;
