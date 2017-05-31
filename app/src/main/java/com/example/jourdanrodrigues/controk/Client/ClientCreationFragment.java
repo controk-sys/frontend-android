@@ -26,24 +26,27 @@ public class ClientCreationFragment extends BaseFragmentCreation {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
 
-        final ClientCreationActivity activity = (ClientCreationActivity) getActivity();
-
         view.findViewById(R.id.fab_create_contact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!errorInFields()) {
-                    activity.mClient = new Client(
-                        mName.getText().toString(),
-                        mEmail.getText().toString(),
-                        mCpf.getText().toString(),
-                        mObs.getText().toString()
-                    );
-                    activity.updateFragment(new ContactCreationFragment(), "ClientCreationFragment");
+                    continueCreation();
                 }
             }
         });
 
         return view;
+    }
+
+    private void continueCreation() {
+        ClientCreationActivity activity = (ClientCreationActivity) getActivity();
+        activity.mClient = new Client(
+            mName.getText().toString(),
+            mEmail.getText().toString(),
+            mCpf.getText().toString(),
+            mObs.getText().toString()
+        );
+        activity.updateFragment(new ContactCreationFragment(), "ClientCreationFragment");
     }
 
     protected Boolean errorInFields() {

@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cep"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionSend"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
     </android.support.constraint.ConstraintLayout>

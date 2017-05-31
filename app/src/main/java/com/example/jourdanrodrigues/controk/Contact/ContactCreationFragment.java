@@ -2,10 +2,13 @@ package com.example.jourdanrodrigues.controk.Contact;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.jourdanrodrigues.controk.Address.AddressCreationFragment;
 import com.example.jourdanrodrigues.controk.BaseFragmentCreation;
@@ -25,23 +28,30 @@ public class ContactCreationFragment extends BaseFragmentCreation {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
 
-        final BasePersonCreationActivity activity = (BasePersonCreationActivity) getActivity();
+        setActionSendListener();
 
         view.findViewById(R.id.fab_create_address).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!errorInFields()) {
-                    activity.mContact = new Contact(
-                        mCellPhone.getText().toString(),
-                        mPhone.getText().toString()
-                    );
-                    activity.updateFragment(new AddressCreationFragment(), "ContactCreationFragment");
+                    continueCreation();
                 }
             }
         });
 
         return view;
     }
+
+
+    private void continueCreation() {
+        BasePersonCreationActivity activity = (BasePersonCreationActivity) getActivity();
+        activity.mContact = new Contact(
+            mCellPhone.getText().toString(),
+            mPhone.getText().toString()
+        );
+        activity.updateFragment(new AddressCreationFragment(), "ContactCreationFragment");
+    }
+
 
     @Override
     public int getFragment() {
@@ -65,5 +75,17 @@ public class ContactCreationFragment extends BaseFragmentCreation {
 
         setEmptyFieldValidations(mCellPhone);
         setEmptyFieldValidations(mPhone);
+    }
+
+    private void setActionSendListener() {
+        mPhone.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    continueCreation();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

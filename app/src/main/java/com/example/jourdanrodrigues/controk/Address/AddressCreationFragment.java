@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,23 +51,13 @@ public class AddressCreationFragment extends BaseFragmentCreation {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
 
-        final BasePersonCreationActivity activity = (BasePersonCreationActivity) getActivity();
+        setActionSendListener(view);
 
         view.findViewById(R.id.fab_finish_creation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!errorInFields()) {
-                    activity.mAddress = new Address(
-                        mPlaceOptionsMap.get(mPlaceOption.getSelectedItem().toString()),
-                        mPlaceName.getText().toString(),
-                        Integer.parseInt(mNumber.getText().toString()),
-                        mComplement.getText().toString(),
-                        mNeighborhood.getText().toString(),
-                        mCity.getText().toString(),
-                        mState.getText().toString(),
-                        mCep.getText().toString()
-                    );
-                    Snackbar.make(view, "Successfully got here.", Snackbar.LENGTH_LONG).show();
+                    performCreation(view);
                 }
             }
         });
@@ -72,6 +65,20 @@ public class AddressCreationFragment extends BaseFragmentCreation {
         setPlaceOptions();
 
         return view;
+    }
+
+    private void performCreation(View view) {
+        ((BasePersonCreationActivity) getActivity()).mAddress = new Address(
+            mPlaceOptionsMap.get(mPlaceOption.getSelectedItem().toString()),
+            mPlaceName.getText().toString(),
+            Integer.parseInt(mNumber.getText().toString()),
+            mComplement.getText().toString(),
+            mNeighborhood.getText().toString(),
+            mCity.getText().toString(),
+            mState.getText().toString(),
+            mCep.getText().toString()
+        );
+        Snackbar.make(view, "Successfully got here.", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -154,5 +161,17 @@ public class AddressCreationFragment extends BaseFragmentCreation {
         setEmptyFieldValidations(mCity);
         setEmptyFieldValidations(mState);
         setEmptyFieldValidations(mCep);
+    }
+
+    private void setActionSendListener(final View view) {
+        mCep.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    performCreation(view);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }
