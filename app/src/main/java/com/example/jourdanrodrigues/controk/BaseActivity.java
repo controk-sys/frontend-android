@@ -1,9 +1,11 @@
 package com.example.jourdanrodrigues.controk;
 
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
-
     @Override
     public void finish() {
         super.finish();
@@ -15,10 +17,21 @@ public class BaseActivity extends AppCompatActivity implements BaseFragment.OnFr
 
     }
 
+    public void updateFragment(Fragment fragment, @Nullable String backToFragment) {
+        getSupportFragmentManager().beginTransaction()
+            .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+            .replace(R.id.content_frame, fragment)
+            .addToBackStack(backToFragment)
+            .commit();
+    }
+
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 1) {
+            fragmentManager.popBackStack();
+        } else if (fragmentManager.getBackStackEntryCount() == 1) {
+            finish();
         } else {
             super.onBackPressed();
         }

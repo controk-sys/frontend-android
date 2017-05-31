@@ -1,6 +1,6 @@
 package com.example.jourdanrodrigues.controk.Client;
 
-class Client {
+public class Client {
     private String name;
     private String email;
     private String cpf;
