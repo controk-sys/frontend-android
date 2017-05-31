@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.controk.Client;
+package com.example.jourdanrodrigues.controk.Employee;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -11,13 +11,14 @@ import com.example.jourdanrodrigues.controk.BaseFragmentCreation;
 import com.example.jourdanrodrigues.controk.Contact.ContactCreationFragment;
 import com.example.jourdanrodrigues.controk.R;
 
-public class ClientCreationFragment extends BaseFragmentCreation {
+public class EmployeeCreationFragment extends BaseFragmentCreation {
     private EditText mName;
     private EditText mEmail;
     private EditText mCpf;
+    private EditText mRole;
     private EditText mObs;
 
-    public ClientCreationFragment() {
+    public EmployeeCreationFragment() {
 
     }
 
@@ -39,11 +40,12 @@ public class ClientCreationFragment extends BaseFragmentCreation {
     }
 
     private void continueCreation() {
-        ClientCreationActivity activity = (ClientCreationActivity) getActivity();
-        activity.mClient = new Client(
+        EmployeeCreationActivity activity = (EmployeeCreationActivity) getActivity();
+        activity.mEmployee = new Employee(
             mName.getText().toString(),
             mEmail.getText().toString(),
             mCpf.getText().toString(),
+            mRole.getText().toString(),
             mObs.getText().toString()
         );
         activity.updateFragment(new ContactCreationFragment(), "EmployeeCreationFragment");
@@ -54,24 +56,26 @@ public class ClientCreationFragment extends BaseFragmentCreation {
     }
 
     protected void initializeFields(View view) {
-        mName = ((TextInputLayout) view.findViewById(R.id.client_name_field)).getEditText();
-        mEmail = ((TextInputLayout) view.findViewById(R.id.client_email_field)).getEditText();
-        mCpf = ((TextInputLayout) view.findViewById(R.id.client_cpf_field)).getEditText();
-        mObs = ((TextInputLayout) view.findViewById(R.id.client_obs_field)).getEditText();
+        mName = ((TextInputLayout) view.findViewById(R.id.employee_name_field)).getEditText();
+        mEmail = ((TextInputLayout) view.findViewById(R.id.employee_email_field)).getEditText();
+        mCpf = ((TextInputLayout) view.findViewById(R.id.employee_cpf_field)).getEditText();
+        mRole = ((TextInputLayout) view.findViewById(R.id.employee_role_field)).getEditText();
+        mObs = ((TextInputLayout) view.findViewById(R.id.employee_obs_field)).getEditText();
 
         setEmptyFieldValidations(mName);
         setEmptyFieldValidations(mEmail);
         setEmptyFieldValidations(mCpf);
+        setEmptyFieldValidations(mRole);
         setEmptyFieldValidations(mObs);
     }
 
     @Override
     public int getFragment() {
-        return R.layout.fragment_client_creation;
+        return R.layout.fragment_employee_creation;
     }
 
     @Override
     public int getTitle() {
-        return R.string.client_creation_title;
+        return R.string.employee_creation_title;
     }
 }

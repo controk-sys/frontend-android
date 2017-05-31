@@ -1,4 +1,4 @@
-package com.example.jourdanrodrigues.controk.Client;
+package com.example.jourdanrodrigues.controk.Employee;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,22 +21,22 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class ClientCreationActivity extends BasePersonCreationActivity {
-    public Client mClient;
+public class EmployeeCreationActivity extends BasePersonCreationActivity {
+    public Employee mEmployee;
     public Socket mSocket = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_creation);
+        setContentView(R.layout.activity_employee_creation);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(R.string.client_creation_title);
+            actionBar.setTitle(R.string.employee_creation_title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        updateFragment(new ClientCreationFragment(), null);
+        updateFragment(new EmployeeCreationFragment(), null);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ClientCreationActivity extends BasePersonCreationActivity {
     }
 
     public void performCreation(final BaseFragmentCreation fragment) {
-        final JSONObject client = new JSONObject();
+        final JSONObject employee = new JSONObject();
         JSONObject address = new JSONObject();
 
         final View view = fragment.getView();
@@ -56,7 +56,7 @@ public class ClientCreationActivity extends BasePersonCreationActivity {
 
         Snackbar.make(view, "Employee creation started.", Snackbar.LENGTH_INDEFINITE);
 
-        final ClientCreationActivity activity = this;
+        final EmployeeCreationActivity activity = this;
 
         try {
             address.put("place", mAddress.getPlaceOption());
@@ -68,20 +68,21 @@ public class ClientCreationActivity extends BasePersonCreationActivity {
             address.put("state", mAddress.getState());
             address.put("cep", mAddress.getCep());
 
-            client.put("name", mClient.getName());
-            client.put("email", mClient.getEmail());
-            client.put("cpf", mClient.getCpf());
-            client.put("mobile", mContact.getCellPhone());
-            client.put("phone", mContact.getPhone());
-            client.put("observation", mClient.getObservation());
-            client.put("address", address);
+            employee.put("name", mEmployee.getName());
+            employee.put("email", mEmployee.getEmail());
+            employee.put("cpf", mEmployee.getCpf());
+            employee.put("role", mEmployee.getRole());
+            employee.put("mobile", mContact.getCellPhone());
+            employee.put("phone", mContact.getPhone());
+            employee.put("observation", mEmployee.getObservation());
+            employee.put("address", address);
 
 
             mSocket = mSocket != null ? mSocket : IO.socket(getResources().getString(R.string.web_socket_host));
             mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    mSocket.emit("create client", client);
+                    mSocket.emit("create employee", employee);
                 }
             }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
                 @Override

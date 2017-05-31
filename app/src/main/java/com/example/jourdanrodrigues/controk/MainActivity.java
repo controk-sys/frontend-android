@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.jourdanrodrigues.controk.Client.ClientListFragment;
+import com.example.jourdanrodrigues.controk.Employee.EmployeeListFragment;
 
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
@@ -60,8 +61,8 @@ public class MainActivity extends BaseActivity {
         private void selectItem(int position) {
             if (position == ClientListFragment.ARG_MENU_POSITION) {
                 updateFragment(new ClientListFragment(), null);
-            } else if (position == EmployeeFragment.ARG_MENU_POSITION) {
-                updateFragment(new EmployeeFragment(), null);
+            } else if (position == EmployeeListFragment.ARG_MENU_POSITION) {
+                updateFragment(new EmployeeListFragment(), null);
             } else if (position == SupplierFragment.ARG_MENU_POSITION) {
                 updateFragment(new SupplierFragment(), null);
             } else if (position == ProductFragment.ARG_MENU_POSITION) {

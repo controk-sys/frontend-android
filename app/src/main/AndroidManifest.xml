@@ -20,9 +20,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Client.ClientCreationActivity"
-            android:screenOrientation="sensorPortrait">
+        <activity
+            android:name=".Client.ClientCreationActivity"
+            android:screenOrientation="sensorPortrait" />
 
-        </activity>
+        <activity
+            android:name=".Employee.EmployeeCreationActivity"
+            android:screenOrientation="sensorPortrait" />
     </application>
 </manifest>
