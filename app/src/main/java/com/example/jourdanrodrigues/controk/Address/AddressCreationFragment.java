@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.android.volley.Request;
@@ -16,7 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.jourdanrodrigues.controk.BaseFragment;
+import com.example.jourdanrodrigues.controk.BaseFragmentCreation;
 import com.example.jourdanrodrigues.controk.BasePersonCreationActivity;
 import com.example.jourdanrodrigues.controk.R;
 
@@ -26,17 +27,17 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class AddressCreationFragment extends BaseFragment {
+public class AddressCreationFragment extends BaseFragmentCreation {
     private String[] mPlaceOptions;
     private HashMap<String, Integer> mPlaceOptionsMap;
     private Spinner mPlaceOption;
-    private TextInputLayout mPlaceName;
-    private TextInputLayout mNumber;
-    private TextInputLayout mComplement;
-    private TextInputLayout mNeighborhood;
-    private TextInputLayout mCity;
-    private TextInputLayout mState;
-    private TextInputLayout mCep;
+    private EditText mPlaceName;
+    private EditText mNumber;
+    private EditText mComplement;
+    private EditText mNeighborhood;
+    private EditText mCity;
+    private EditText mState;
+    private EditText mCep;
 
     public AddressCreationFragment() {
 
@@ -47,31 +48,24 @@ public class AddressCreationFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
 
-        mPlaceOption = (Spinner) view.findViewById(R.id.place_option_field);
-        mPlaceName = (TextInputLayout) view.findViewById(R.id.place_name_field);
-        mNumber = (TextInputLayout) view.findViewById(R.id.address_number_field);
-        mComplement = (TextInputLayout) view.findViewById(R.id.address_complement_field);
-        mNeighborhood = (TextInputLayout) view.findViewById(R.id.address_neighborhood_field);
-        mCity = (TextInputLayout) view.findViewById(R.id.address_city_field);
-        mState = (TextInputLayout) view.findViewById(R.id.address_state_field);
-        mCep = (TextInputLayout) view.findViewById(R.id.address_cep_field);
-
         final BasePersonCreationActivity activity = (BasePersonCreationActivity) getActivity();
 
         view.findViewById(R.id.fab_finish_creation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.mAddress = new Address(
-                    mPlaceOptionsMap.get(mPlaceOption.getSelectedItem().toString()),
-                    mPlaceName.getEditText().getText().toString(),
-                    Integer.parseInt(mNumber.getEditText().getText().toString()),
-                    mComplement.getEditText().getText().toString(),
-                    mNeighborhood.getEditText().getText().toString(),
-                    mCity.getEditText().getText().toString(),
-                    mState.getEditText().getText().toString(),
-                    mCep.getEditText().getText().toString()
-                );
-                Snackbar.make(view, "Successfully got here.", Snackbar.LENGTH_LONG).show();
+                if (!errorInFields()) {
+                    activity.mAddress = new Address(
+                        mPlaceOptionsMap.get(mPlaceOption.getSelectedItem().toString()),
+                        mPlaceName.getText().toString(),
+                        Integer.parseInt(mNumber.getText().toString()),
+                        mComplement.getText().toString(),
+                        mNeighborhood.getText().toString(),
+                        mCity.getText().toString(),
+                        mState.getText().toString(),
+                        mCep.getText().toString()
+                    );
+                    Snackbar.make(view, "Successfully got here.", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -133,5 +127,32 @@ public class AddressCreationFragment extends BaseFragment {
             mPlaceOptionsMap.put(placeOption.getString("name"), placeOption.getInt("id"));
             mPlaceOptions[i] = placeOption.getString("name");
         }
+    }
+
+    @Override
+    protected Boolean errorInFields() {
+        return (mPlaceName.getError() != null || mNumber.getError() != null ||
+            mComplement.getError() != null || mNeighborhood.getError() != null ||
+            mCity.getError() != null || mState.getError() != null || mCep.getError() != null);
+    }
+
+    @Override
+    protected void initializeFields(View view) {
+        mPlaceOption = (Spinner) view.findViewById(R.id.place_option_field);
+        mPlaceName = ((TextInputLayout) view.findViewById(R.id.place_name_field)).getEditText();
+        mNumber = ((TextInputLayout) view.findViewById(R.id.address_number_field)).getEditText();
+        mComplement = ((TextInputLayout) view.findViewById(R.id.address_complement_field)).getEditText();
+        mNeighborhood = ((TextInputLayout) view.findViewById(R.id.address_neighborhood_field)).getEditText();
+        mCity = ((TextInputLayout) view.findViewById(R.id.address_city_field)).getEditText();
+        mState = ((TextInputLayout) view.findViewById(R.id.address_state_field)).getEditText();
+        mCep = ((TextInputLayout) view.findViewById(R.id.address_cep_field)).getEditText();
+
+        setEmptyFieldValidations(mPlaceName);
+        setEmptyFieldValidations(mNumber);
+        setEmptyFieldValidations(mComplement);
+        setEmptyFieldValidations(mNeighborhood);
+        setEmptyFieldValidations(mCity);
+        setEmptyFieldValidations(mState);
+        setEmptyFieldValidations(mCep);
     }
 }
