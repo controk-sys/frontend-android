@@ -2,8 +2,8 @@ package com.example.jourdanrodrigues.controk.Address;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +17,26 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jourdanrodrigues.controk.BaseFragment;
+import com.example.jourdanrodrigues.controk.BasePersonCreationActivity;
 import com.example.jourdanrodrigues.controk.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class AddressCreationFragment extends BaseFragment {
     private String[] mPlaceOptions;
-    private SparseArray<String> mPlaceOptionsMap;
+    private HashMap<String, Integer> mPlaceOptionsMap;
+    private Spinner mPlaceOption;
+    private TextInputLayout mPlaceName;
+    private TextInputLayout mNumber;
+    private TextInputLayout mComplement;
+    private TextInputLayout mNeighborhood;
+    private TextInputLayout mCity;
+    private TextInputLayout mState;
+    private TextInputLayout mCep;
 
     public AddressCreationFragment() {
 
@@ -36,10 +47,31 @@ public class AddressCreationFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         assert view != null;
 
+        mPlaceOption = (Spinner) view.findViewById(R.id.place_option_field);
+        mPlaceName = (TextInputLayout) view.findViewById(R.id.place_name_field);
+        mNumber = (TextInputLayout) view.findViewById(R.id.address_number_field);
+        mComplement = (TextInputLayout) view.findViewById(R.id.address_complement_field);
+        mNeighborhood = (TextInputLayout) view.findViewById(R.id.address_neighborhood_field);
+        mCity = (TextInputLayout) view.findViewById(R.id.address_city_field);
+        mState = (TextInputLayout) view.findViewById(R.id.address_state_field);
+        mCep = (TextInputLayout) view.findViewById(R.id.address_cep_field);
+
+        final BasePersonCreationActivity activity = (BasePersonCreationActivity) getActivity();
+
         view.findViewById(R.id.fab_finish_creation).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Successfuly got here.", Snackbar.LENGTH_LONG).show();
+            public void onClick(View view) {
+                activity.mAddress = new Address(
+                    mPlaceOptionsMap.get(mPlaceOption.getSelectedItem().toString()),
+                    mPlaceName.getEditText().getText().toString(),
+                    Integer.parseInt(mNumber.getEditText().getText().toString()),
+                    mComplement.getEditText().getText().toString(),
+                    mNeighborhood.getEditText().getText().toString(),
+                    mCity.getEditText().getText().toString(),
+                    mState.getEditText().getText().toString(),
+                    mCep.getEditText().getText().toString()
+                );
+                Snackbar.make(view, "Successfully got here.", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -94,11 +126,11 @@ public class AddressCreationFragment extends BaseFragment {
 
     private void buildPlaceOptions(JSONArray placeOptions) throws JSONException {
         mPlaceOptions = new String[placeOptions.length()];
-        mPlaceOptionsMap = new SparseArray<>();
+        mPlaceOptionsMap = new HashMap<>();
 
         for (int i = 0; i < placeOptions.length(); i++) {
             JSONObject placeOption = (JSONObject) placeOptions.get(i);
-            mPlaceOptionsMap.put(placeOption.getInt("id"), placeOption.getString("name"));
+            mPlaceOptionsMap.put(placeOption.getString("name"), placeOption.getInt("id"));
             mPlaceOptions[i] = placeOption.getString("name");
         }
     }
