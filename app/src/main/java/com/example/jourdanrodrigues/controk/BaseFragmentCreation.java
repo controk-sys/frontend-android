@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-public abstract class BaseFragmentCreation extends BaseFragment{
+public abstract class BaseFragmentCreation extends BaseFragment {
 
     protected abstract Boolean errorInFields();
+
     protected abstract void initializeFields(View view);
 
     @Override
@@ -27,11 +28,15 @@ public abstract class BaseFragmentCreation extends BaseFragment{
     protected void setEmptyFieldValidations(final EditText editText) {
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) { validateEmptyField(editText); }
+            public void onFocusChange(View v, boolean hasFocus) {
+                validateEmptyField(editText);
+            }
         });
         editText.addTextChangedListener(new TextValidator(editText) {
             @Override
-            public void validate(EditText innerEditText) { validateEmptyField(innerEditText); }
+            public void validate(EditText innerEditText) {
+                validateEmptyField(innerEditText);
+            }
         });
     }
 }
