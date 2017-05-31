@@ -14,10 +14,10 @@
         tools:context="com.example.jourdanrodrigues.controk.Client.ClientCreationFragment">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/name_field"
+            android:id="@+id/client_name_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/cpf_field"
+            app:layout_constraintBottom_toTopOf="@+id/client_cpf_field"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,13 +31,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/cpf_field"
+            android:id="@+id/client_cpf_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/obs_field"
+            app:layout_constraintBottom_toTopOf="@+id/client_obs_field"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_field">
+            app:layout_constraintTop_toBottomOf="@+id/client_name_field">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
@@ -49,12 +49,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/obs_field"
+            android:id="@+id/client_obs_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cpf_field">
+            app:layout_constraintTop_toBottomOf="@+id/client_cpf_field">
 
             <EditText
                 android:layout_width="match_parent"
